@@ -2,17 +2,19 @@
 简单的laravel8 crud示例
 
 
-在本教程中，想展示Laravel 8 Crud操作示例。
+在本教程中,想展示Laravel 8 Crud操作示例。
+
 步骤1:安装Laravel 8
 
-首先，安装最新版本Laravel框架。
+首先,安装最新版本Laravel框架。
 
 composer create-project --prefer-dist laravel/laravel blog
 
 步骤2:数据库配置
 
-在第二步中，我们将使数据库配置进行数据库配置，例如我们的Crud应用程序的数据库名称，用户名，密码等。因此，让我们打开.env文件并填充.
+在第二步中,我们将使数据库配置进行数据库配置,例如我们的Crud应用程序的数据库名称,用户名,密码等。因此,让我们打开.env文件并填充.
 
+```env
 .env
 
 DB_CONNECTION=mysql
@@ -27,16 +29,19 @@ DB_USERNAME=数据库帐号
 
 DB_PASSWORD=数据库密码
 
+```
+
 参考阅读: Laravel 8 - 新函数
+
 步骤3:创建迁移
 
 我们将为Product表创建Crud应用程序。所以我们使用Laravel 8 PHP Artisan命令为"Products"表创建迁移:
 
 php artisan make:migration create_products_table --create=products
 
-在此命令之后，您将在以下路径"database/migrations"中找到一个文件。
+在此命令之后,您将在以下路径"database/migrations"中找到一个文件。
 
-<?php
+```php
 
   
 
@@ -66,7 +71,7 @@ class CreateProductsTable extends Migration
 
     {
 
-        Schema::create('products'， function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
 
             $table->id();
 
@@ -101,32 +106,39 @@ class CreateProductsTable extends Migration
     }
 
 }
+```
 
-现在，通过以下命令运行此迁移:
+现在,通过以下命令运行此迁移:
 
+```powershell
 php artisan migrate
+```
 
 步骤4:添加资源路由
 
-此处，我们需要为Product 创建CRUD资源路由。打开"routes/web.php"文件并添加以下路由。
+此处,我们需要为Product 创建CRUD资源路由。打开"routes/web.php"文件并添加以下路由。
 
+```php
 routes/web.php
 
 use App\Http\Controllers\ProductController;
 
   
 
-Route::resource('products'， ProductController::class);
+Route::resource('products', ProductController::class);
+```
 
 步骤5:添加控制器和模型
 
-在此步骤中，现在将新的控制器创建为ProductController，运行以下命令并创建新控制器。
+在此步骤中,现在将新的控制器创建为ProductController,运行以下命令并创建新控制器。
+```php
 
 php artisan make:controller ProductController --resource --model=Product
+```
 
-命令后，您将在此路径中找到新文件"app/Http/Controllers/ProductController.php"。
+命令后,您将在此路径中找到新文件"app/Http/Controllers/ProductController.php"。
 
-在此控制器中，默认情况下将创建七种方法:
+在此控制器中,默认情况下将创建七种方法:
 
         1)index()   -  首页调用
 
@@ -142,11 +154,11 @@ php artisan make:controller ProductController --resource --model=Product
 
         7)destroy() - 删除时调用
 
-所以，让我们复制代码并放在ProductController.php文件中。
+所以,让我们复制代码并放在ProductController.php文件中。
 
 app/Http/Controller/ProductController.php
 
-<?php
+```php
 
   
 
@@ -182,9 +194,9 @@ class ProductController extends Controller
 
     
 
-        return view('products.index'，compact('products'))
+        return view('products.index',compact('products'))
 
-            ->with('i'， (request()->input('page'， 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 5);
 
     }
 
@@ -228,9 +240,9 @@ class ProductController extends Controller
 
         $request->validate([
 
-            'name' => 'required'，
+            'name' => 'required',
 
-            'detail' => 'required'，
+            'detail' => 'required',
 
         ]);
 
@@ -242,7 +254,7 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')
 
-                        ->with('success'，'Product created successfully.');
+                        ->with('success','Product created successfully.');
 
     }
 
@@ -264,7 +276,7 @@ class ProductController extends Controller
 
     {
 
-        return view('products.show'，compact('product'));
+        return view('products.show',compact('product'));
 
     } 
 
@@ -286,7 +298,7 @@ class ProductController extends Controller
 
     {
 
-        return view('products.edit'，compact('product'));
+        return view('products.edit',compact('product'));
 
     }
 
@@ -306,15 +318,15 @@ class ProductController extends Controller
 
      */
 
-    public function update(Request $request， Product $product)
+    public function update(Request $request, Product $product)
 
     {
 
         $request->validate([
 
-            'name' => 'required'，
+            'name' => 'required',
 
-            'detail' => 'required'，
+            'detail' => 'required',
 
         ]);
 
@@ -326,7 +338,7 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')
 
-                        ->with('success'，'Product updated successfully');
+                        ->with('success','Product updated successfully');
 
     }
 
@@ -354,17 +366,19 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')
 
-                        ->with('success'，'Product deleted successfully');
+                        ->with('success','Product deleted successfully');
 
     }
 
 }
 
-好的，所以在运行命令后，您将找到"app/Models/Product.php"并将内容复制进Product.php文件:
+```
+
+好的,所以在运行命令后,您将找到"app/Models/Product.php"并将内容复制进Product.php文件:
 
 app/Models/Product.php
 
-<?php
+```php
 
   
 
@@ -388,15 +402,15 @@ class Product extends Model
 
     protected $fillable = [
 
-        'name'， 'detail'
+        'name', 'detail'
 
     ];
 
 }
-
+```
 步骤6:添加视图页面
 
-在最后一步。我们创建Blade视图文件。先创建布局文件，然后创建新文件夹"products"，最后创建Crud对应的的blade页面。
+在最后一步。我们创建Blade视图文件。先创建布局文件,然后创建新文件夹"products",最后创建Crud对应的的blade页面。
 
         1)layout.blade.php      -  布局文件
 
@@ -411,6 +425,8 @@ class Product extends Model
 所以让我们只是创建以下文件并将代码放在下面。
 
 resources/views/products/layout.blade.php
+
+```html
 
 <!DOCTYPE html>
 
@@ -439,8 +455,10 @@ resources/views/products/layout.blade.php
 </body>
 
 </html>
+```
 
 resources/views/products/index.blade.php
+```html
 
 @extends('products.layout')
 
@@ -508,15 +526,15 @@ resources/views/products/index.blade.php
 
             <td>
 
-                <form action="{{ route('products.destroy'，$product->id) }}" method="POST">
+                <form action="{{ route('products.destroy',$product->id) }}" method="POST">
 
    
 
-                    <a class="btn btn-info" href="{{ route('products.show'，$product->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a>
 
     
 
-                    <a class="btn btn-primary" href="{{ route('products.edit'，$product->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
 
    
 
@@ -546,8 +564,11 @@ resources/views/products/index.blade.php
 
 @endsection
 
+```
+
 resources/views/products/create.blade.php
 
+```html
 @extends('products.layout')
 
   
@@ -624,7 +645,7 @@ resources/views/products/create.blade.php
 
                 <strong>Detail:</strong>
 
-                <pre class="form-control" style="height:150px" name="detail" placeholder="Detail"></pre>
+                <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail"></textarea>
 
             </div>
 
@@ -643,8 +664,11 @@ resources/views/products/create.blade.php
 </form>
 
 @endsection
+```
 
 resources/views/products/edit.blade.php
+
+```html
 
 @extends('products.layout')
 
@@ -696,7 +720,7 @@ resources/views/products/edit.blade.php
 
   
 
-    <form action="{{ route('products.update'，$product->id) }}" method="POST">
+    <form action="{{ route('products.update',$product->id) }}" method="POST">
 
         @csrf
 
@@ -724,7 +748,7 @@ resources/views/products/edit.blade.php
 
                     <strong>Detail:</strong>
 
-                    <pre class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $product->detail }}</pre>
+                    <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $product->detail }}</textarea>
 
                 </div>
 
@@ -743,8 +767,11 @@ resources/views/products/edit.blade.php
     </form>
 
 @endsection
+```
 
 resources/views/products/show.blade.php
+
+```html
 
 @extends('products.layout')
 
@@ -804,12 +831,17 @@ resources/views/products/show.blade.php
 
 @endsection
 
-现在我们使用Laravel 8 命令行运行我们的示例，因此运行命令运行:
+```
+
+现在我们使用Laravel 8 命令行运行我们的示例,因此运行命令运行:
+
+```php
 
 php artisan serve
+```
 
-现在，您可以在浏览器上打开以下URL:
+现在,您可以在浏览器上打开以下URL:
 
 http://localhost:8000/products
 
-你会看到以下页面布局
+
