@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\admin\ArticleController;
+use App\Http\Controllers\SearchController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,5 +62,8 @@ Route::prefix('admin/article')->group(function (){
 });
 
 Route::resource('products', ProductController::class);
+
+Route::get('search', [SearchController::class, 'index'])->name('search');
+Route::get('autocomplete', [SearchController::class, 'autocomplete'])->name('autocomplete');
 
 require __DIR__.'/auth.php';

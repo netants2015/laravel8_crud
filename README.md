@@ -434,7 +434,7 @@ resources/views/products/layout.blade.php
 
 <head>
 
-    <title>Laravel 8 CRUD Application - 无涯教程</title>
+    <title>Laravel 8 CRUD Application</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
 
