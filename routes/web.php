@@ -66,4 +66,13 @@ Route::resource('products', ProductController::class);
 Route::get('search', [SearchController::class, 'index'])->name('search');
 Route::get('autocomplete', [SearchController::class, 'autocomplete'])->name('autocomplete');
 
+
+Route::get('importExportView', [MyController::class, 'importExportView']);
+Route::get('export', [MyController::class, 'export'])->name('export');
+Route::post('import', [MyController::class, 'import'])->name('import');
+
+Route::get('file-upload', [FileUploadController::class, 'fileUpload'])->name('file.upload');
+
+Route::post('file-upload', [FileUploadController::class, 'fileUploadPost'])->name('file.upload.post');
+
 require __DIR__.'/auth.php';

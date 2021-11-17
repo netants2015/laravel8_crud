@@ -845,3 +845,9 @@ php artisan serve
 http://localhost:8000/products
 
 
+#### 增加了Autocomplete搜索 
+#### 增加了Excel和CSV导入,导出  
+#### 增加了Pagination分页  
+#### 增加了文件上传  
+#### 增加了自定义函数助手 
+#### 增加了表格验证  
